@@ -19,7 +19,7 @@ export default function Footer() {
         <a href="https://github.com/barecha12" target="_blank" rel="noreferrer">
           <FaGithub />
         </a>
-        <a href="https://www.linkedin.com/in/yourname" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/berecha" target="_blank" rel="noreferrer">
           <FaLinkedin />
         </a>
         <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
