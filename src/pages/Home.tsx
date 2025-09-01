@@ -17,7 +17,7 @@ export default function Home() {
             <Link to="/contact" className="btn ghost">Contact Me</Link>
           </div>
         </div>
-        <img className="hero-img" src="/avatar.png" alt="Your portrait" />
+        <img className="hero-img" src="/public/image/img.JPG" alt="Your portrait" />
       </section>
 
       <section>
