@@ -17,7 +17,10 @@ export default function Contact() {
           <span>Message</span>
           <textarea name="message" rows={6} placeholder="Write your message here..." required></textarea>
         </label>
-        <button className="btn" type="submit">Send message</button>
+        <button className="btn" type="submit" style={{
+    display: "inline-block",
+    textAlign: "center",
+  }}>Send message</button>
       </form>
       <p className="muted">Prefer email? <a href="mailto:you@yourdomain.com">ashenafibarecha34@gmail.com</a></p>
     </section>
