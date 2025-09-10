@@ -53,7 +53,10 @@ export default function About() {
         </div>
       </div>
 
-      <a className="btn" href="/resume.pdf" download>
+      <a className="btn" href="/resume.pdf" download style={{
+    display: "inline-block",
+    textAlign: "center",
+  }}>
         Download Résumé
       </a>
     </section>
