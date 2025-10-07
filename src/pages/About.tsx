@@ -1,6 +1,8 @@
 import { ArcThemeProvider, Button } from '../lib/arc-ui';
+import SkillBar from '../components/SkillBar';
+import { skills } from '../data/skills';
+import { useState } from 'react';
 
-// Named export
 export function ArcPreview() {
   return (
     <ArcThemeProvider defaultTheme="dark">
@@ -18,13 +20,18 @@ export function ArcPreview() {
   );
 }
 
-// Default export (the About page)
 export default function About() {
+  const [activeCategory, setActiveCategory] = useState<'all' | 'frontend' | 'backend' | 'tools'>('all');
+
+  const filteredSkills = activeCategory === 'all'
+    ? skills
+    : skills.filter(s => s.category === activeCategory);
+
   return (
     <section className="stack gap-lg">
       <h1>About Me</h1>
       <p className="lead">
-        I’m Barecha, a full-stack software engineer passionate about building
+        I'm Barecha, a full-stack software engineer passionate about building
         modern web applications that balance performance, scalability, and great
         user experience. I specialize in React and Laravel, with a strong focus
         on clean architecture and design systems.
@@ -43,13 +50,63 @@ export default function About() {
         </div>
 
         <div className="stack">
-          <h3>Skills</h3>
-          <ul className="tags">
-            <li>React</li><li>TypeScript</li><li>Laravel</li><li>PHP</li>
-            <li>MySQL</li><li>REST APIs</li><li>Node.js</li><li>Next.js</li>
-            <li>Authentication & Security</li><li>UI/UX Design Systems</li>
-            <li>Performance Optimization</li><li>Multi-language Apps</li>
-          </ul>
+          <h3>Quick Stats</h3>
+          <div className="stats-grid">
+            <div className="stat-card">
+              <span className="stat-number">4+</span>
+              <span className="stat-label">Years Experience</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-number">20+</span>
+              <span className="stat-label">Projects Completed</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-number">10+</span>
+              <span className="stat-label">Technologies</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="skills-section">
+        <div className="skills-header">
+          <h3>Technical Skills</h3>
+          <div className="skill-categories">
+            <button
+              className={`category-btn ${activeCategory === 'all' ? 'active' : ''}`}
+              onClick={() => setActiveCategory('all')}
+            >
+              All
+            </button>
+            <button
+              className={`category-btn ${activeCategory === 'frontend' ? 'active' : ''}`}
+              onClick={() => setActiveCategory('frontend')}
+            >
+              Frontend
+            </button>
+            <button
+              className={`category-btn ${activeCategory === 'backend' ? 'active' : ''}`}
+              onClick={() => setActiveCategory('backend')}
+            >
+              Backend
+            </button>
+            <button
+              className={`category-btn ${activeCategory === 'tools' ? 'active' : ''}`}
+              onClick={() => setActiveCategory('tools')}
+            >
+              Tools
+            </button>
+          </div>
+        </div>
+        <div className="skills-list">
+          {filteredSkills.map(skill => (
+            <SkillBar
+              key={skill.name}
+              skill={skill.name}
+              level={skill.level}
+              category={skill.category}
+            />
+          ))}
         </div>
       </div>
 

@@ -1,5 +1,20 @@
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+function AnimatedSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const { ref, isVisible } = useScrollAnimation(0.1);
+
+  return (
+    <section
+      ref={ref as any}
+      className={isVisible ? 'animate-fade-in-up' : ''}
+      style={{ opacity: isVisible ? 1 : 0, animationDelay: `${delay}ms` }}
+    >
+      {children}
+    </section>
+  );
+}
 
 export default function Home() {
   const featured = projects.slice(0, 3);
@@ -7,20 +22,20 @@ export default function Home() {
     <section className="stack gap-xl">
       <section className="hero">
         <div className="hero-copy">
-          <h1>Hi, I’m <span className="accent">Barecha Ashenafi</span> 👋</h1>
+          <h1>Hi, I'm <span className="accent">Barecha Ashenafi</span> 👋</h1>
           <p className="lead">
             I build fast, accessible web apps with React and TypeScript.
-            Let’s turn ideas into lovable products.
+            Let's turn ideas into lovable products.
           </p>
           <div className="row">
             <Link to="/projects" className="btn">View Projects</Link>
             <Link to="/contact" className="btn ghost">Contact Me</Link>
           </div>
         </div>
-        <img className="hero-img" src="/image/img.JPG" alt="Your portrait" />
+        <img className="hero-img" src="/image/img.JPG" alt="Your portrait" loading="lazy" />
       </section>
 
-      <section>
+      <AnimatedSection delay={100}>
         <h2>Featured work</h2>
         <div className="grid">
           {featured.map(p => <a key={p.id} href={`/projects#${p.id}`} className="card-link">
@@ -33,13 +48,15 @@ export default function Home() {
             </article>
           </a>)}
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="cta">
-        <h2>Available for freelance & full-time</h2>
-        <p>Need a React expert on your team? I can help with design systems, performance, and DX.</p>
-        <Link to="/contact" className="btn">Let’s talk</Link>
-      </section>
+      <AnimatedSection delay={200}>
+        <div className="cta">
+          <h2>Available for freelance & full-time</h2>
+          <p>Need a React expert on your team? I can help with design systems, performance, and DX.</p>
+          <Link to="/contact" className="btn">Let's talk</Link>
+        </div>
+      </AnimatedSection>
     </section>
   );
 }

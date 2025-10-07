@@ -5,8 +5,11 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import { usePageView } from './hooks/usePageView';
 
 export default function App() {
+  usePageView();
+
   return (
     <div className="app">
       <Navbar />
