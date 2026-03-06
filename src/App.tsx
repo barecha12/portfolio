@@ -1,28 +1,40 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Projects from './pages/Projects';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import { usePageView } from './hooks/usePageView';
+import { ThemeProvider, useTheme } from './hooks/useTheme';
+import PremiumEnhancements from './components/PremiumEnhancements';
+import TechStackBackground from './components/TechStackBackground';
+import { SITE_META } from './config/site';
 
-export default function App() {
-  usePageView();
+function AppShell() {
+  const { motionPreference } = useTheme();
+
+  useEffect(() => {
+    document.title = SITE_META.title;
+  }, []);
 
   return (
-    <div className="app">
-      <Navbar />
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <MotionConfig reducedMotion={motionPreference === 'reduce' ? 'always' : 'user'}>
+      <TechStackBackground />
+      <PremiumEnhancements />
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <div className="app">
+        <Navbar />
+        <main id="main-content" className="container page-shell" tabIndex={-1}>
+          <Home />
+        </main>
+        <Footer />
+      </div>
+    </MotionConfig>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppShell />
+    </ThemeProvider>
   );
 }
