@@ -21,12 +21,12 @@ export default function Footer() {
           <span className="footer-availability">Open for freelance and full-time roles</span>
         </div>
 
-        <div className="footer-actions">
+        {/* <div className="footer-actions">
           <a className="btn footer-cta" href={`mailto:${SITE_META.email}`}>
             Start a Project <ArrowUpRight size={16} />
           </a>
           <p className="footer-action-note muted">Typically replies within 24 hours.</p>
-        </div>
+        </div> */}
 
         <div className="footer-socials" aria-label="Social links">
           {SOCIAL_LINKS.map((link) => {
